@@ -3,7 +3,7 @@
     <v-container>
       <h1>Course List</h1>
       <v-row>
-        <v-col v-for="course in courses" :key="course.id" cols="12" md="4">
+        <v-col v-for="course in courses" :key="course.id" cols="12" sm="6" md="4" lg="4">
           <CourseCard :course="course" />
         </v-col>
       </v-row>
