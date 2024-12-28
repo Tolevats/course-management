@@ -43,18 +43,56 @@
         </template>
       </v-data-table>
       <AddCourseModal v-model="isAddModalOpen" />
+            <!-- Informative Messages -->
+            <v-row class="my-4">
+        <v-col cols="12" sm="6" md="4">
+          <v-card class="info-card">
+            <v-card-title>Total Students Allowed</v-card-title>
+            <v-card-text>{{ totalStudentsAllowed }}</v-card-text>
+          </v-card>
+        </v-col>
+        <v-col cols="12" sm="6" md="4">
+          <v-card class="info-card">
+            <v-card-title>Total Enrolled Students</v-card-title>
+            <v-card-text>{{ totalEnrolledStudents }}</v-card-text>
+          </v-card>
+        </v-col>
+        <v-col cols="12" sm="6" md="4">
+          <v-card class="info-card">
+            <v-card-title>Total Remaining Places</v-card-title>
+            <v-card-text>{{ totalRemainingPlaces }}</v-card-text>
+          </v-card>
+        </v-col>
+        <v-col cols="12" sm="6" md="4">
+          <v-card class="info-card">
+            <v-card-title>Total Completed Courses</v-card-title>
+            <v-card-text>{{ totalCompletedCourses }}</v-card-text>
+          </v-card>
+        </v-col>
+        <v-col cols="12" sm="6" md="4">
+          <v-card class="info-card">
+            <v-card-title>Total Active Courses</v-card-title>
+            <v-card-text>{{ totalActiveCourses }}</v-card-text>
+          </v-card>
+        </v-col>
+        <v-col cols="12" sm="6" md="4">
+          <v-card class="info-card">
+            <v-card-title>Total Courses</v-card-title>
+            <v-card-text>{{ totalCourses }}</v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import NavBar from '@/components/Navbar.vue'
 import AddCourseModal from '../components/AddCourseModal.vue'
 
 export default {
   name: 'admin-view',
-  // props: {},
   data: () => ({
     isAddModalOpen: false,
     headers: [
@@ -68,7 +106,17 @@ export default {
       { text: 'Actions', value: 'action' }
     ]
   }),
-  computed: mapState(['courses']),
+  computed: {
+    ...mapState(['courses']),
+    ...mapGetters([
+      'totalCourses',
+      'totalStudentsAllowed',
+      'totalEnrolledStudents',
+      'totalRemainingPlaces',
+      'totalCompletedCourses',
+      'totalActiveCourses'
+    ])
+  },
   methods: {
     ...mapActions(['deleteCourse']),
     openAddModal () {
@@ -78,7 +126,6 @@ export default {
       this.$router.push(`/edit/${id}`)
     }
   },
-  // watch: {},
   components: { NavBar, AddCourseModal }
 }
 </script>
