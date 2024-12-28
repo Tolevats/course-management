@@ -46,39 +46,52 @@
             <!-- Informative Messages -->
             <v-row class="my-4">
         <v-col cols="12" sm="6" md="4">
-          <v-card class="info-card">
-            <v-card-title>Total Students Allowed</v-card-title>
-            <v-card-text>{{ totalStudentsAllowed }}</v-card-text>
+          <v-card id="deep-purple">
+            <v-card-title>
+              <v-icon class="mr-4" color="#6A1B9A" size="40px">mdi-account-multiple</v-icon>
+              Total Students Allowed:</v-card-title>
+            <v-card-text id="nmbr-dp"><strong>{{ totalPlaces }}</strong></v-card-text>
           </v-card>
         </v-col>
         <v-col cols="12" sm="6" md="4">
-          <v-card class="info-card">
-            <v-card-title>Total Enrolled Students</v-card-title>
-            <v-card-text>{{ totalEnrolledStudents }}</v-card-text>
+          <v-card id="light-blue">
+            <v-card-title>
+              <v-icon class="mr-4" color="#03A9F4" size="40px">mdi-account-check</v-icon>
+              Total Enrolled Students:</v-card-title>
+            <v-card-text id="nmbr-lb"><strong>{{ totalEnrolled }}</strong></v-card-text>
           </v-card>
         </v-col>
         <v-col cols="12" sm="6" md="4">
-          <v-card class="info-card">
-            <v-card-title>Total Remaining Places</v-card-title>
-            <v-card-text>{{ totalRemainingPlaces }}</v-card-text>
+          <v-card id="coral">
+            <v-card-title>
+              <v-icon class="mr-4" color="#FF1744" size="40px">mdi-account-plus</v-icon>
+              Total Remaining Places:</v-card-title>
+            <v-card-text id="nmbr-coral"><strong>{{ totalRemainingPlaces }}</strong></v-card-text>
           </v-card>
         </v-col>
         <v-col cols="12" sm="6" md="4">
-          <v-card class="info-card">
-            <v-card-title>Total Completed Courses</v-card-title>
-            <v-card-text>{{ totalCompletedCourses }}</v-card-text>
+          <v-card id="pink">
+            <v-card-title>
+              <v-icon class="mr-4" color="#FF4081" size="40px">mdi-cancel</v-icon>
+              Total Completed Courses:</v-card-title>
+            <v-card-text id="nmbr-pink"><strong>{{ totalCompletedCourses }}</strong></v-card-text>
           </v-card>
         </v-col>
         <v-col cols="12" sm="6" md="4">
-          <v-card class="info-card">
-            <v-card-title>Total Active Courses</v-card-title>
-            <v-card-text>{{ totalActiveCourses }}</v-card-text>
+          <v-card id="brown">
+            <v-card-title>
+              <v-icon class="mr-4" color="#827717" size="40px">mdi-bell-ring</v-icon>
+              Total Active Courses:</v-card-title>
+            <v-card-text id="nmbr-brown"><strong>{{ totalActiveCourses }}</strong></v-card-text>
           </v-card>
         </v-col>
         <v-col cols="12" sm="6" md="4">
-          <v-card class="info-card">
-            <v-card-title>Total Courses</v-card-title>
-            <v-card-text>{{ totalCourses }}</v-card-text>
+          <v-card id="orange">
+            <v-card-title>
+              <v-icon class="mr-4" color="#EF6C00" size="40px">mdi-bell-ring</v-icon>
+              Total Courses:
+            </v-card-title>
+            <v-card-text id="nmbr-orange"><strong>{{ totalCourses }}</strong></v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -110,8 +123,8 @@ export default {
     ...mapState(['courses']),
     ...mapGetters([
       'totalCourses',
-      'totalStudentsAllowed',
-      'totalEnrolledStudents',
+      'totalPlaces',
+      'totalEnrolled',
       'totalRemainingPlaces',
       'totalCompletedCourses',
       'totalActiveCourses'
@@ -134,6 +147,55 @@ export default {
 .status-button {
   color: white;
 }
+#deep-purple {
+  border: 4px solid #6A1B9A;
+  color: #6A1B9A;
+}
+#nmbr-dp {
+  color: #6A1B9A;
+  font-size: 2rem;
+}
+#light-blue {
+  border: 4px solid #03A9F4;
+  color: #03A9F4;
+}
+#nmbr-lb {
+  color: #03A9F4;
+  font-size: 2rem;
+}
+#coral {
+  border: 4px solid #FF1744;
+  color: #FF1744;
+}
+#nmbr-coral {
+  color: #FF1744;
+  font-size: 2rem;
+}
+#pink {
+  border: 4px solid #FF4081;
+  color: #FF4081;
+}
+#nmbr-pink {
+  color: #FF4081;
+  font-size: 2rem;
+}
+#brown {
+  border: 4px solid #827717;
+  color: #827717;
+}
+#nmbr-brown {
+  color: #827717;
+  font-size: 2rem;
+}
+#orange {
+  border: 4px solid #EF6C00;
+  color: #EF6C00;
+}
+#nmbr-orange {
+  color: #EF6C00;
+  font-size: 2rem;
+}
+
 @media (max-width: 835px) {
   .v-data-table .v-btn {
     width: 100%; /* Make buttons full width on smaller screens */
