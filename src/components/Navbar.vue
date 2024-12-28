@@ -1,6 +1,5 @@
 <template>
     <v-app-bar app color="#0b1c5b" dark>
-         <v-toolbar-image>
           <v-img
           alt="logo"
           class="shrink mt-1 hidden-sm-and-down"
@@ -9,7 +8,6 @@
           src="@/assets/Logo/SVG/main-logo-white-transparent.svg"
           width="150"
           />
-         </v-toolbar-image>
         <v-spacer></v-spacer>
         <v-btn text to="/" exact>
           <v-icon>mdi-home</v-icon>
