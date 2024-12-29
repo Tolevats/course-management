@@ -91,7 +91,8 @@ export default new Vuex.Store({
     totalPlaces: (state) =>
       state.courses.reduce((sum, course) => sum + course.places, 0),
     totalRemainingPlaces: (state) =>
-      state.courses.reduce((sum, course) => sum + (course.places - course.enrolled), 0)
+      state.courses.reduce((sum, course) => sum + (course.places - course.enrolled), 0),
+    getCourseById: (state) => (id) => state.courses.find(course => course.id === id)
   },
   mutations: {
     ADD_COURSE (state, course) {
@@ -101,8 +102,8 @@ export default new Vuex.Store({
       state.courses = state.courses.filter((course) => course.id !== courseId)
     },
     EDIT_COURSE (state, updatedCourse) {
-      const index = state.courses.findIndex((c) => c.id === updatedCourse.id)
-      if (index !== -1) Vue.set(state.courses, index, updatedCourse)
+      const index = state.courses.findIndex(course => course.id === updatedCourse.id)
+      if (index !== -1) state.courses.splice(index, 1, updatedCourse)
     }
   },
   actions: {
