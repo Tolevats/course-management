@@ -95,6 +95,17 @@
           </v-card>
         </v-col>
       </v-row>
+      <!-- pop-up to confirm deletion -->
+      <v-dialog v-model="isDeleteDialogOpen" max-width="400px">
+        <v-card>
+          <v-card-title>Confirm</v-card-title>
+          <v-card-text>Are you sure you want to delete this course?</v-card-text>
+          <v-card-actions>
+            <v-btn color="grey" text @click="cancelDelete">Cancel</v-btn>
+            <v-btn color="red" @click="confirmDelete">Accept</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-container>
   </div>
 </template>
@@ -117,7 +128,9 @@ export default {
       { text: 'Status', value: 'status' },
       { text: 'Date', value: 'registrationDate' },
       { text: 'Actions', value: 'action' }
-    ]
+    ],
+    isDeleteDialogOpen: false,
+    courseToDelete: null
   }),
   computed: {
     ...mapState(['courses']),
@@ -137,6 +150,19 @@ export default {
     },
     editCourse (id) {
       this.$router.push(`/edit/${id}`)
+    },
+    deleteCourse (id) {
+      this.courseToDelete = id
+      this.isDeleteDialogOpen = true
+    },
+    cancelDelete () {
+      this.isDeleteDialogOpen = false
+      this.courseToDelete = null
+    },
+    confirmDelete () {
+      this.deleteCourse(this.courseToDelete)
+      this.isDeleteDialogOpen = false
+      this.courseToDelete = null
     }
   },
   components: { NavBar, AddCourseModal }
@@ -195,11 +221,4 @@ export default {
   color: #EF6C00;
   font-size: 2rem;
 }
-
-@media (max-width: 835px) {
-  .v-data-table .v-btn {
-    width: 100%; /* Make buttons full width on smaller screens */
-  }
-}
-
 </style>
