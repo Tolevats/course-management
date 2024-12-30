@@ -5,7 +5,7 @@
       <h1>Administration</h1>
       <v-btn class="addCourse ma-12" color="primary" @click="openAddModal">Add Course</v-btn>
       <v-data-table
-        :items="courses"
+        :items="formattedCourses"
         :headers="headers"
         item-value="id"
         class="elevation-1">
@@ -141,7 +141,13 @@ export default {
       'totalRemainingPlaces',
       'totalCompletedCourses',
       'totalActiveCourses'
-    ])
+    ]),
+    formattedCourses () {
+      return this.courses.map(course => ({
+        ...course,
+        registrationDate: this.formatDate(course.registrationDate)
+      }))
+    }
   },
   methods: {
     ...mapActions(['deleteCourse']),
@@ -163,6 +169,16 @@ export default {
       this.deleteCourse(this.courseToDelete)
       this.isDeleteDialogOpen = false
       this.courseToDelete = null
+    },
+    formatDate (dateString) {
+      if (!dateString) return ''
+      const [day, month, year] = dateString.split('/')
+      const formattedDate = new Date(`20${year}-${month}-${day}`)
+      if (isNaN(formattedDate)) return 'Invalid Date'
+      const newDay = String(formattedDate.getDate()).padStart(2, '0')
+      const newMonth = String(formattedDate.getMonth() + 1).padStart(2, '0')
+      const newYear = String(formattedDate.getFullYear()).slice(-2)
+      return `${newDay}/${newMonth}/${newYear}`
     }
   },
   components: { NavBar, AddCourseModal }
