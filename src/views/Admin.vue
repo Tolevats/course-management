@@ -166,19 +166,19 @@ export default {
       this.courseToDelete = null
     },
     confirmDelete () {
-      this.deleteCourse(this.courseToDelete)
-      this.isDeleteDialogOpen = false
-      this.courseToDelete = null
+      this.$store.dispatch('deleteCourse', this.courseToDelete) // dispatch the delete action
+        .then(() => {
+          this.isDeleteDialogOpen = false
+          this.courseToDelete = null
+        })
+        .catch(error => { // handle error
+          console.error('Error deleting course:', error)
+        })
     },
     formatDate (dateString) {
-      if (!dateString) return ''
+      if (!dateString) return 'Invalid Date'
       const [day, month, year] = dateString.split('/')
-      const formattedDate = new Date(`20${year}-${month}-${day}`)
-      if (isNaN(formattedDate)) return 'Invalid Date'
-      const newDay = String(formattedDate.getDate()).padStart(2, '0')
-      const newMonth = String(formattedDate.getMonth() + 1).padStart(2, '0')
-      const newYear = String(formattedDate.getFullYear()).slice(-2)
-      return `${newDay}/${newMonth}/${newYear}`
+      return `${day}/${month}/${year}`
     }
   },
   components: { NavBar, AddCourseModal }
