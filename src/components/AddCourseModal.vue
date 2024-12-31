@@ -11,12 +11,20 @@
           <v-text-field
             label="Course Name"
             v-model="course.name"
-            :rules="[v => !!v || 'Name is required']"
+            :counter="30"
+            :rules="[
+              v => !!v || 'Name is required',
+              v => (v && v.length <= 30) || 'Name must be less than 30 characters'
+            ]"
           />
           <v-text-field
             label="Image URL"
             v-model="course.imageUrl"
-            :rules="[v => !!v || 'Image URL is required']"
+            :counter="100"
+            :rules="[
+              v => !!v || 'Image URL is required',
+              v => (v && v.length <= 100) || 'Name must be less than 100 characters'
+            ]"
           />
           <v-text-field
             label="Places"
@@ -33,6 +41,16 @@
           <v-text-field
             label="Duration"
             v-model="course.duration"
+            :counter="15"
+            :rules="[
+              v => !!v || 'Duration is required',
+              v => (v && v.length <= 15) || 'Duration must be less than 15 characters'
+            ]"
+          />
+          <v-text-field
+            label="Registration Date"
+            :value="formattedRegistrationDate"
+            :disabled="true"
           />
           <v-text-field
             label="Cost"
@@ -42,12 +60,17 @@
           <v-textarea
             label="Description"
             v-model="course.description"
+            :counter="300"
+            :rules="[
+              v => !!v || 'Description is required',
+              v => (v && v.length <= 300) || 'Description must be less than 300 characters'
+            ]"
             rows="3"
           />
         </v-form>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="grey" text @click="closeDialog">Cancel</v-btn>
+        <v-btn color="error" text @click="closeDialog">Cancel</v-btn>
         <v-btn color="success" :disabled="!isValid" @click="addCourse">Add</v-btn>
       </v-card-actions>
     </v-card>
@@ -72,9 +95,20 @@ export default {
         places: 0,
         enrolled: 0,
         duration: '',
+        registrationDate: new Date().toISOString(), // initialize registrationDate
         cost: 0,
         description: ''
       }
+    }
+  },
+  computed: {
+    formattedRegistrationDate () {
+      if (!this.course.registrationDate) return ''
+      const date = new Date(this.course.registrationDate)
+      const day = String(date.getDate()).padStart(2, '0')
+      const month = String(date.getMonth() + 1).padStart(2, '0') // Months are zero-based
+      const year = String(date.getFullYear()).slice(-2) // Get last two digits of the year
+      return `${day}/${month}/${year}`
     }
   },
   watch: {
@@ -94,10 +128,12 @@ export default {
         alert('Enrolled students cannot exceed places.')
         return
       }
+
+      const formattedDate = this.formattedRegistrationDate // get the formatted date
       const newCourse = {
         ...this.course,
         status: false,
-        registrationDate: new Date().toISOString()
+        registrationDate: formattedDate // Use the formatted date
       }
       this.$store.dispatch('addCourse', newCourse)
       this.closeDialog()
