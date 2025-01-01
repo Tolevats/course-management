@@ -117,6 +117,9 @@ export default new Vuex.Store({
     },
     editCourse ({ commit }, course) {
       commit('EDIT_COURSE', course)
+    },
+    updateCourse ({ commit }, updatedCourse) {
+      commit('EDIT_COURSE', updatedCourse)
     }
   },
   modules: {
