@@ -155,7 +155,13 @@ export default {
       this.isAddModalOpen = true
     },
     editCourse (id) {
-      this.$router.push(`/edit/${id}`)
+      if (!this.$store.state.courses || this.$store.state.courses.length === 0) {
+        this.$store.dispatch('fetchCourses').then(() => {
+          this.$router.push(`/admin/edit/${id}`)
+        })
+      } else {
+        this.$router.push(`/admin/edit/${id}`)
+      }
     },
     deleteCourse (id) {
       this.courseToDelete = id
