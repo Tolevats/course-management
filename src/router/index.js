@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Admin from '../views/Admin.vue'
-import EditCourse from '@/views/EditCourse.vue'
 
 Vue.use(VueRouter)
 
@@ -18,9 +17,9 @@ const routes = [
     component: Admin
   },
   {
-    path: '/edit/:id',
-    name: 'editCourse',
-    component: EditCourse
+    path: '/admin/edit/:id',
+    name: 'edit',
+    component: () => import('@/views/EditCourse.vue') // lazy-loaded component
   }
 ]
 
