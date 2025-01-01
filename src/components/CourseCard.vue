@@ -4,7 +4,7 @@
         <v-card-title class="course-title">{{ course.name }}</v-card-title>
         <v-card-text class="course-description">{{ course.description }}</v-card-text>
         <v-card-actions class="course-actions">
-            <v-btn text :to="'/edit/' + course.id" class="edit-btn">Edit</v-btn>
+            <v-btn text :to="'/admin/edit/' + course.id" class="edit-btn">Edit</v-btn>
         </v-card-actions>
     </v-card>
 </template>
