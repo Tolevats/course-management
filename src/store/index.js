@@ -92,7 +92,9 @@ export default new Vuex.Store({
       state.courses.reduce((sum, course) => sum + course.places, 0),
     totalRemainingPlaces: (state) =>
       state.courses.reduce((sum, course) => sum + (course.places - course.enrolled), 0),
-    getCourseById: (state) => (id) => state.courses.find(course => course.id === id)
+    getCourseById: (state) => (id) => {
+      return state.courses.find(course => course.id === id)
+    }
   },
   mutations: {
     ADD_COURSE (state, course) {
