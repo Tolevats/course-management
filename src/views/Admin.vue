@@ -2,96 +2,73 @@
   <div>
     <NavBar />
     <v-container class="text-center">
-      <h1>Administration</h1>
+      <h1 class="font-weight-bold">Administration</h1>
       <v-btn class="addCourse ma-12" color="primary" @click="openAddModal">Add Course</v-btn>
-      <v-data-table
-        :items="formattedCourses"
-        :headers="headers"
-        item-value="id"
-        class="elevation-1">
-        <template v-slot:[`item.cost`]="{ item }">
-          <v-btn class="cost-button" color="success" rounded>
-            ${{ item.cost }}
-          </v-btn>
-        </template>
-        <template v-slot:[`item.status`]="{ item }">
-          <v-btn class="status-button"
-            :color="item.status ? 'light-blue' : 'brown lighten-3'"
-            rounded
-          >
-            {{ item.status ? 'Yes' : 'No' }}
-          </v-btn>
-        </template>
-        <template v-slot:[`item.registrationDate`]="{ item }">
-          <v-btn class="date-button" color="success" rounded>
-            {{ item.registrationDate }}
-          </v-btn>
-        </template>
-        <template v-slot:[`item.action`]="{ item }">
-          <v-row>
-            <v-col cols="12" md="auto">
-              <v-btn @click="editCourse(item.id)">
-                <v-icon color="orange">mdi-pencil</v-icon>
-              </v-btn>
-            </v-col>
-            <v-col cols="12" md="auto">
-              <v-btn @click="deleteCourse(item.id)">
-                <v-icon color="red">mdi-delete</v-icon>
-              </v-btn>
-            </v-col>
-          </v-row>
-        </template>
-      </v-data-table>
+      <v-row class="mx-4" justify="center">
+        <v-col cols="12">
+          <!-- Responsive Container -->
+          <div class="table-container">
+            <v-data-table
+            :items="formattedCourses"
+            :headers="headers"
+            item-value="id"
+            class="elevation-4"
+            dense
+            hide-default-footer
+            >
+              <template v-slot:[`item.cost`]="{ item }">
+                <v-chip color="success" text>
+                  $ {{ item.cost }}
+                </v-chip>
+              </template>
+              <template v-slot:[`item.status`]="{ item }">
+                <v-chip
+                  :color="item.status ? 'light-blue' : 'brown lighten-3'"
+                  text
+                >
+                  {{ item.status ? 'Yes' : 'No' }}
+                </v-chip>
+              </template>
+              <template v-slot:[`item.registrationDate`]="{ item }">
+                <v-chip color="success">
+                  {{ item.registrationDate }}
+                </v-chip>
+              </template>
+              <template v-slot:[`item.action`]="{ item }">
+                <v-row dense justify="space-between" align="center" class="action-buttons">
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn @click="editCourse(item.id)" v-bind="attrs" v-on="on" class="mt-4 responsive-btn">
+                        <v-icon color="orange">mdi-pencil</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Edit Course</span>
+                  </v-tooltip>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn @click="deleteCourse(item.id)" v-bind="attrs" v-on="on" class="my-4 responsive-btn">
+                        <v-icon color="red">mdi-delete</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Delete Course</span>
+                  </v-tooltip>
+                </v-row>
+              </template>
+            </v-data-table>
+          </div>
+        </v-col>
+      </v-row>
+
       <AddCourseModal v-model="isAddModalOpen" />
-            <!-- Informative Messages -->
-            <v-row class="my-4">
-        <v-col cols="12" sm="6" md="4">
-          <v-card id="deep-purple">
-            <v-card-title>
-              <v-icon class="mr-4" color="#6A1B9A" size="40px">mdi-account-multiple</v-icon>
-              Total Students Allowed:</v-card-title>
-            <v-card-text id="nmbr-dp"><strong>{{ totalPlaces }}</strong></v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-card id="light-blue">
-            <v-card-title>
-              <v-icon class="mr-4" color="#03A9F4" size="40px">mdi-account-check</v-icon>
-              Total Enrolled Students:</v-card-title>
-            <v-card-text id="nmbr-lb"><strong>{{ totalEnrolled }}</strong></v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-card id="coral">
-            <v-card-title>
-              <v-icon class="mr-4" color="#FF1744" size="40px">mdi-account-plus</v-icon>
-              Total Remaining Places:</v-card-title>
-            <v-card-text id="nmbr-coral"><strong>{{ totalRemainingPlaces }}</strong></v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-card id="pink">
-            <v-card-title>
-              <v-icon class="mr-4" color="#FF4081" size="40px">mdi-cancel</v-icon>
-              Total Completed Courses:</v-card-title>
-            <v-card-text id="nmbr-pink"><strong>{{ totalCompletedCourses }}</strong></v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-card id="brown">
-            <v-card-title>
-              <v-icon class="mr-4" color="#827717" size="40px">mdi-bell-ring</v-icon>
-              Total Active Courses:</v-card-title>
-            <v-card-text id="nmbr-brown"><strong>{{ totalActiveCourses }}</strong></v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-card id="orange">
-            <v-card-title>
-              <v-icon class="mr-4" color="#EF6C00" size="40px">mdi-bell-ring</v-icon>
-              Total Courses:
+      <!-- STATS -->
+      <v-row class="mx-4">
+        <v-col cols="12" sm="6" md="4" v-for="(stat, index) in stats" :key="index">
+          <v-card :style="{ border: `2px solid ${stat.color}` }">
+            <v-card-title class="d-flex flex-column text-h6">
+              <v-icon class="mr-4" :color="stat.iconColor" size="40px">{{ stat.icon }}</v-icon>
+              <span :style="{ color: stat.color }" class="text-wrap">{{ stat.title }}</span>
             </v-card-title>
-            <v-card-text id="nmbr-orange"><strong>{{ totalCourses }}</strong></v-card-text>
+            <v-card-text class="text-h4 font-weight-bold" :style="{ color: stat.color }">{{ stat.value }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -147,6 +124,16 @@ export default {
         ...course,
         registrationDate: this.formatDate(course.registrationDate)
       }))
+    },
+    stats () {
+      return [
+        { title: 'Total Students Allowed:', value: this.totalPlaces, color: '#6A1B9A', icon: 'mdi-account-multiple', iconColor: '#6A1B9A' },
+        { title: 'Total Enrolled Students:', value: this.totalEnrolled, color: '#03A9F4', icon: 'mdi-account-check', iconColor: '#03A9F4' },
+        { title: 'Total Remaining Places:', value: this.totalRemainingPlaces, color: '#FF1744', icon: 'mdi-account-plus', iconColor: '#FF1744' },
+        { title: 'Total Completed Courses:', value: this.totalCompletedCourses, color: '#FF4081', icon: 'mdi-cancel', iconColor: '#FF4081' },
+        { title: 'Total Active Courses:', value: this.totalActiveCourses, icon: 'mdi-bell-ring', color: '#827717', iconColor: '#827717' },
+        { title: 'Total Courses:', value: this.totalCourses, color: '#EF6C00', icon: 'mdi-bell-ring', iconColor: '#EF6C00' }
+      ]
     }
   },
   methods: {
@@ -192,55 +179,47 @@ export default {
 </script>
 
 <style scoped>
+.table-container {
+  padding-bottom: 1rem;
+}
+.v-data-table {
+  color: #0c1c5a;
+  border: 2px solid #0c1c5a;
+}
+.v-chip {
+  color: white;
+  margin: 6px 0;
+}
+.addCourse {
+  font-size: 1rem;
+  font-weight: bold;
+}
 .status-button {
   color: white;
 }
-#deep-purple {
-  border: 4px solid #6A1B9A;
-  color: #6A1B9A;
+.v-card {
+  transition: transform 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-#nmbr-dp {
-  color: #6A1B9A;
-  font-size: 2rem;
+.v-card:hover {
+  transform: scale(1.05);
 }
-#light-blue {
-  border: 4px solid #03A9F4;
-  color: #03A9F4;
+.text-wrap {
+  white-space: normal; /* allow text to wrap */
+  overflow-wrap: break-word; /* ensure long words break */
 }
-#nmbr-lb {
-  color: #03A9F4;
-  font-size: 2rem;
+.action-buttons {
+  flex-wrap: wrap;
 }
-#coral {
-  border: 4px solid #FF1744;
-  color: #FF1744;
+
+.responsive-btn {
+  display: inline-block;
 }
-#nmbr-coral {
-  color: #FF1744;
-  font-size: 2rem;
-}
-#pink {
-  border: 4px solid #FF4081;
-  color: #FF4081;
-}
-#nmbr-pink {
-  color: #FF4081;
-  font-size: 2rem;
-}
-#brown {
-  border: 4px solid #827717;
-  color: #827717;
-}
-#nmbr-brown {
-  color: #827717;
-  font-size: 2rem;
-}
-#orange {
-  border: 4px solid #EF6C00;
-  color: #EF6C00;
-}
-#nmbr-orange {
-  color: #EF6C00;
-  font-size: 2rem;
+
+@media (min-width: 960px) {
+  .responsive-btn {
+    display: block; /* make buttons stack vertically for md screens */
+    width: 100%; /* ensure full width for block layout */
+  }
 }
 </style>
