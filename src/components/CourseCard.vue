@@ -3,33 +3,10 @@
         <v-img :src="course.image" class="course-image" height="240px" contain></v-img>
         <v-card-title class="course-title">{{ course.name }}</v-card-title>
         <v-card-text class="course-info">
-          <v-timeline
-            align-top
-            dense
-          >
-            <v-timeline-item color="#0b1c5b" small>
+          <v-timeline align-top dense>
+            <v-timeline-item v-for="(item, index) in timelineItems" :key="index" color="#0b1c5b" small>
               <div>
-                Cost: <strong>${{ course.cost }}</strong>
-              </div>
-            </v-timeline-item>
-            <v-timeline-item color="#0b1c5b" small>
-              <div>
-                Duration: <strong>{{ course.duration }}</strong>
-              </div>
-            </v-timeline-item>
-            <v-timeline-item color="#0b1c5b" small>
-              <div>
-                Places: <strong>{{ course.places }}</strong>
-              </div>
-            </v-timeline-item>
-            <v-timeline-item color="#0b1c5b" small>
-              <div>
-                Completed: <strong>{{ courseStatus }}</strong>
-              </div>
-            </v-timeline-item>
-            <v-timeline-item color="#0b1c5b" small>
-              <div>
-                Registration Date: <strong>{{ course.registrationDate }}</strong>
+                {{ item.label }}: <strong>{{ item.value }}</strong>
               </div>
             </v-timeline-item>
           </v-timeline>
@@ -44,7 +21,7 @@
 
 <script>
 export default {
-  name: 'card-component',
+  name: 'CourseCard',
   props: {
     course: {
       type: Object,
@@ -54,6 +31,15 @@ export default {
   computed: {
     courseStatus () {
       return this.course.status ? 'Yes' : 'No'
+    },
+    timelineItems () {
+      return [
+        { label: 'Cost', value: `$${this.course.cost}` },
+        { label: 'Duration', value: this.course.duration },
+        { label: 'Places', value: this.course.places },
+        { label: 'Completed', value: this.courseStatus },
+        { label: 'Registration Date', value: this.course.registrationDate }
+      ]
     }
   }
 }
