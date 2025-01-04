@@ -9,74 +9,74 @@ export default new Vuex.Store({
       {
         id: 1,
         image: 'https://i.blogs.es/545cf8/es6-logo/450_1000.png',
-        name: 'JavaScript Avanzado',
+        name: 'Advanced JavaScript',
         cost: 30000,
-        duration: '2 meses',
+        duration: '2 months',
         places: 20,
         enrolled: 10,
         status: false,
         registrationDate: '06/03/2022',
-        description: 'Curso con las nuevas actualizaciones de JavaScript.'
+        description: 'Course with the new JavaScript updates.'
       },
       {
         id: 2,
         image: 'https://lineadecodigo.com/wp-content/uploads/2014/04/css.png',
-        name: 'CSS para principiantes',
+        name: 'CSS for Beginners',
         cost: 10000,
-        duration: '1 mes',
+        duration: '1 month',
         places: 35,
         enrolled: 23,
         status: false,
         registrationDate: '05/03/2022',
-        description: 'Aprendiendo estilos con CSS desde el nivel más básico.'
+        description: 'Learning CSS styles from the most basic level.'
       },
       {
         id: 3,
         image: 'https://1000marcas.net/wp-content/uploads/2020/11/JavaScript-logo.jpg',
-        name: 'JavaScript Básico de 0 a 100',
+        name: 'Basic JavaScript from 0 to 100',
         cost: 20000,
-        duration: '2 meses',
+        duration: '2 months',
         places: 25,
         enrolled: 0,
         status: true,
         registrationDate: '05/03/2022',
-        description: 'Programando para la web con JavaScript.'
+        description: 'Programming for the web with JavaScript.'
       },
       {
         id: 4,
         image: 'https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png',
-        name: 'HTML Básico',
+        name: 'Basic HTML',
         cost: 10000,
-        duration: '1 mes',
+        duration: '1 month',
         places: 35,
         enrolled: 0,
         status: true,
         registrationDate: '31/01/2022',
-        description: 'Aprende HTML 5 y crea tus primeras páginas web paso a paso con decenas de ejercicios.'
+        description: 'Learn HTML 5 and create your first web pages step by step with dozens of exercises.'
       },
       {
         id: 5,
         image: 'https://logosandtypes.com/wp-content/uploads/2020/08/vue.svg',
-        name: 'Vue JS de 0 a 100',
+        name: 'Vue JS from 0 to 100',
         cost: 85500,
-        duration: '5 meses',
+        duration: '5 months',
         places: 35,
         enrolled: 35,
         status: false,
         registrationDate: '06/03/2022',
-        description: 'Aprende desde cero como usar VueJS, cómo usarlo en aplicaciones pequeñas y ver lo que ofrece el framework.'
+        description: 'Learn from scratch how to use VueJS, how to use it in small applications and see what the framework offers.'
       },
       {
         id: 6,
         image: 'https://miro.medium.com/max/512/1*9U1toerFxB8aiFRreLxEUQ.png',
-        name: 'Estilos con SASS',
+        name: 'Styles with SASS',
         cost: 45000,
-        duration: '1 mes',
+        duration: '1 month',
         places: 40,
         enrolled: 35,
         status: false,
         registrationDate: '06/03/2022',
-        description: 'Con SASS aprenderás a escribir mejor código de CSS con todas las funciones necesarias.'
+        description: 'With SASS you will learn to write better CSS code with all the necessary functions.'
       }
     ]
   },
