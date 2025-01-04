@@ -11,6 +11,8 @@
           <v-text-field
             label="Course Name"
             v-model="course.name"
+            outlined
+            required
             :counter="30"
             :rules="[
               v => !!v || 'Name is required',
@@ -20,6 +22,8 @@
           <v-text-field
             label="Image URL"
             v-model="course.imageUrl"
+            outlined
+            required
             :counter="100"
             :rules="[
               v => !!v || 'Image URL is required',
@@ -30,17 +34,23 @@
             label="Places"
             v-model.number="course.places"
             type="number"
+            outlined
+            required
             :rules="[v => v > 0 || 'Must be greater than 0']"
           />
           <v-text-field
             label="Enrolled"
             v-model.number="course.enrolled"
             type="number"
+            outlined
+            required
             :rules="[v => v <= course.places || 'Enrolled must not exceed places']"
           />
           <v-text-field
             label="Duration"
             v-model="course.duration"
+            outlined
+            required
             :counter="15"
             :rules="[
               v => !!v || 'Duration is required',
@@ -49,6 +59,8 @@
           />
           <v-text-field
             label="Registration Date"
+            outlined
+            required
             :value="formattedRegistrationDate"
             :disabled="true"
           />
@@ -56,10 +68,14 @@
             label="Cost"
             v-model.number="course.cost"
             type="number"
+            outlined
+            required
           />
           <v-textarea
             label="Description"
             v-model="course.description"
+            outlined
+            required
             :counter="300"
             :rules="[
               v => !!v || 'Description is required',
