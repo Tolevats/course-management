@@ -1,5 +1,22 @@
 # Course Management System
 
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Functionality](#functionality)
+  - [Home Interface](#home-interface)
+  - [Administration Interface](#administration-interface)
+  - [Course Management Features](#course-management-features)
+  - [Course Addition & Validation](#course-addition--validation)
+  - [Course Deletion & Confirmation](#course-deletion--confirmation)
+  - [Course Editing](#course-editing)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running the Application](#running-the-application)
+- [Contributing](#contributing)
+- [Acknowledgments](#acknowledgments)
+
 ## Overview
 The **Course Management System** is a Vue.js application developed for a University. This project aims to create an intuitive and efficient interface for managing courses using the Vuetify UI framework. The application enables users to view, add, edit, and delete courses while providing essential information about course enrollment and availability.
 
